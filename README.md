@@ -1,5 +1,11 @@
 # GroceryFun
 
+following along with a blog post
+
+by Tim Deschryver
+
+https://blog.angularindepth.com/sharing-data-between-modules-is-peanuts-3f40fcb38dd
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
 ## Development server
