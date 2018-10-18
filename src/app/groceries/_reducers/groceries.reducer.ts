@@ -18,3 +18,5 @@ export function stateReducer(state = initialState, action): State {
 }
 
 export const reducer = stateReducer;
+
+export const { selectAll } = adapter.getSelectors();
