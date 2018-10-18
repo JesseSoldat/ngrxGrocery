@@ -1,0 +1,12 @@
+<mat-nav-list *ngIf="groceries.length else noGroceries">
+  <mat-list-item *ngFor="let grocery of groceries">
+
+    {{ grocery.description }}
+  </mat-list-item>
+</mat-nav-list>
+
+<ng-template #noGroceries>
+  <p>
+    No groceries on the list
+  </p>
+</ng-template>

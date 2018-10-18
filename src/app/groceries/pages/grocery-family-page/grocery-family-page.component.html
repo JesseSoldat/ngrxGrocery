@@ -1,4 +1,12 @@
 <div class="page">
+  <mat-card *ngFor="let familyMemberGrocery of familyMembersGroceries | async">
+    <app-header [familyMember]="familyMemberGrocery.familyMember">
+      <button mat-raised-button [routerLink]="[familyMemberGrocery.familyMember.id]">Open grocery list</button>
+    </app-header>
+    <mat-card-content>
+      <app-grocery-list [groceries]="familyMemberGrocery.groceries"></app-grocery-list>
+    </mat-card-content>
+  </mat-card>
 
 </div>
 <a mat-stroked-button routerLink="/">Home</a>

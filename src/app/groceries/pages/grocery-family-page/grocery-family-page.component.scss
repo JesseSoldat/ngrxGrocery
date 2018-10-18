@@ -1,0 +1,13 @@
+.page {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+mat-card {
+  margin-bottom: 20px !important;
+  flex-basis: 40%;
+  flex-grow: 0;
+  margin-bottom: 5px;
+}
