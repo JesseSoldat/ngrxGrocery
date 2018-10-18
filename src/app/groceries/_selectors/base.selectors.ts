@@ -3,22 +3,22 @@ import { createSelector, createFeatureSelector } from '@ngrx/store';
 import {
   GroceriesState,
   State,
-  groceries as fromGroceries,
+  groceries as fromGroceries
 } from '../_reducers';
 import { FamilyMemberGroceriesDict } from '../_models';
 
 export const groceriesState = createFeatureSelector<State, GroceriesState>(
-  'groceries',
+  'groceries'
 );
 
 export const getGroceriesState = createSelector(
   groceriesState,
-  state => state.groceries,
+  state => state.groceries
 );
 
 export const getGroceries = createSelector(
   getGroceriesState,
-  fromGroceries.selectAll,
+  fromGroceries.selectAll
 );
 
 export const getGroceriesByFamilyMember = createSelector(
@@ -26,15 +26,16 @@ export const getGroceriesByFamilyMember = createSelector(
   groceries =>
     groceries.reduce<FamilyMemberGroceriesDict>(
       (groceriesByFamilyMember, grocery) => {
-        const { familyMemberId } = grocery;
-        // if the key exist it does not change else make it an empty array
-        groceriesByFamilyMember[familyMemberId] =
-          groceriesByFamilyMember[familyMemberId] || [];
-        // add the grocery to the family members list
-        groceriesByFamilyMember[familyMemberId].concat(grocery);
-
+        // if the key exists do not change it else make it an empty array
+        groceriesByFamilyMember[grocery.familyMemberId] =
+          groceriesByFamilyMember[grocery.familyMemberId] || [];
+        // add the grocer to the family member
+        groceriesByFamilyMember[
+          grocery.familyMemberId
+        ] = groceriesByFamilyMember[grocery.familyMemberId].concat(grocery);
+        // console.log(groceriesByFamilyMember);
         return groceriesByFamilyMember;
       },
-      {},
-    ),
+      {}
+    )
 );

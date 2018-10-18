@@ -1,0 +1,11 @@
+button {
+  opacity: 0;
+}
+
+mat-list-item:not(.checked-off):hover button {
+  opacity: 1;
+}
+
+.checked-off {
+  text-decoration: line-through !important;
+}

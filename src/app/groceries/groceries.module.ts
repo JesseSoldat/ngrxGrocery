@@ -17,6 +17,8 @@ import { GroceryFamilyPageComponent } from './pages/grocery-family-page/grocery-
 import { HeaderComponent } from './_components/header/header.component';
 import { GroceryListComponent } from './_components/grocery-list/grocery-list.component';
 import { GroceryInputComponent } from './_components/grocery-input/grocery-input.component';
+import { GroceryVisibilityComponent } from './_components/grocery-visibility/grocery-visibility.component';
+import { RemoveCheckedOutGroceriesComponent } from './_components/remove-checked-out-groceries/remove-checked-out-groceries.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,9 @@ import { GroceryInputComponent } from './_components/grocery-input/grocery-input
     GroceryFamilyPageComponent,
     HeaderComponent,
     GroceryListComponent,
-    GroceryInputComponent
+    GroceryInputComponent,
+    GroceryVisibilityComponent,
+    RemoveCheckedOutGroceriesComponent
   ]
 })
 export class GroceriesModule {}

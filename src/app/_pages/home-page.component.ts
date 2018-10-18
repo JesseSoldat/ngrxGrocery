@@ -17,7 +17,9 @@ import { FamilyDict } from '../_models';
     {{ member.value.avatar }} {{member.value.name}}
   </a>
     </mat-nav-list>
-  `,
+
+    <a mat-stroked-button routerLink="/groceries" style="width: 100%">Open family grocery lists</a>
+  `
 })
 export class HomePageComponent implements OnInit {
   familyMembers: Observable<FamilyDict>;

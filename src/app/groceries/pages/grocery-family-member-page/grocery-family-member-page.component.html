@@ -1,11 +1,22 @@
 <div class="page">
   <mat-card>
+
     <app-header [familyMember]="familyMember | async">
+
+      <app-grocery-visibility (toggleCheckedOffGroceries)="toggleCheckedOffGroceries()"></app-grocery-visibility>
+
+      <app-remove-checked-out-groceries [familyMember]="familyMember | async" (removeCheckedOffGroceries)="removeCheckedOffGroceries($event)"></app-remove-checked-out-groceries>
+
     </app-header>
+
     <mat-card-content>
-      <app-grocery-list [groceries]="groceries | async"></app-grocery-list>
+
+      <app-grocery-list [groceries]="groceries | async" (checkOffGrocery)="checkOffGrocery($event)"></app-grocery-list>
+
       <app-grocery-input [familyMember]="familyMember | async" (addGrocery)="addGrocery($event)"></app-grocery-input>
+
     </mat-card-content>
+
     <mat-card-actions align='end'>
       <a mat-stroked-button routerLink="/">Home</a>
     </mat-card-actions>

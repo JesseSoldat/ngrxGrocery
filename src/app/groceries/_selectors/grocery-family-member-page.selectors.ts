@@ -27,5 +27,9 @@ export const getActiveFamilyMember = createSelector(
 export const getActiveFamilyMemberGroceries = createSelector(
   getGroceriesByFamilyMember,
   getActiveFamilyMemberId,
-  (groceries, familyMemberId) => groceries[familyMemberId] || []
+  (groceries, familyMemberId) => {
+    // console.log('familyMemberId', familyMemberId);
+    // console.log('groceries', groceries);
+    return groceries[familyMemberId] || [];
+  }
 );

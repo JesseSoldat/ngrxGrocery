@@ -1,8 +1,12 @@
 <mat-nav-list *ngIf="groceries.length else noGroceries">
-  <mat-list-item *ngFor="let grocery of groceries">
 
+  <mat-list-item *ngFor="let grocery of groceries" (click)="checkOff(grocery)" [class.checked-off]="grocery.checkedOffOn">
+    <button mat-icon-button>
+      <mat-icon>done</mat-icon>
+    </button>
     {{ grocery.description }}
   </mat-list-item>
+
 </mat-nav-list>
 
 <ng-template #noGroceries>
