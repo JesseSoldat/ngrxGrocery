@@ -17,4 +17,4 @@ export const reducers: ActionReducerMap<State> = {
 
 export const metaReducers = environment.production ? [] : [storeFreeze];
 
-export { RouterReducerState };
+export { family, RouterReducerState };
