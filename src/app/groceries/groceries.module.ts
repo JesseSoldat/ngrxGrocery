@@ -16,6 +16,7 @@ import { GroceryFamilyMemberPageComponent } from './pages/grocery-family-member-
 import { GroceryFamilyPageComponent } from './pages/grocery-family-page/grocery-family-page.component';
 import { HeaderComponent } from './_components/header/header.component';
 import { GroceryListComponent } from './_components/grocery-list/grocery-list.component';
+import { GroceryInputComponent } from './_components/grocery-input/grocery-input.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { GroceryListComponent } from './_components/grocery-list/grocery-list.co
     GroceryFamilyMemberPageComponent,
     GroceryFamilyPageComponent,
     HeaderComponent,
-    GroceryListComponent
+    GroceryListComponent,
+    GroceryInputComponent
   ]
 })
 export class GroceriesModule {}
