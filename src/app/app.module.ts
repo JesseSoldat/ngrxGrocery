@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { reducers, metaReducers } from './_reducers';
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './pages/home-page.component';
+import { HomePageComponent } from './_pages/home-page.component';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],

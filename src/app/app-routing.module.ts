@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomePageComponent } from './pages/home-page.component';
+import { HomePageComponent } from './_pages/home-page.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +12,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomePageComponent,
+  },
+  {
+    path: 'groceries',
+    loadChildren: './groceries/groceries.module#GroceriesModule',
   },
 ];
 
