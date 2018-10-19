@@ -1,4 +1,4 @@
-import { ActionReducer } from '@ngrx/store';
+import { ActionReducer, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import uuid from 'uuid';
 
@@ -122,6 +122,29 @@ export function stateReducer(
   }
 }
 
-export const reducer = stateReducer;
+export function persistStateReducer(_reducer: ActionReducer<State>) {
+  const localStorageKey = '__groceries';
+  return (state: State | undefined, action: Action) => {
+    // state is not saved
+    if (state === undefined) {
+      try {
+        const persisted = localStorage.getItem(localStorageKey);
+        return persisted ? JSON.parse(persisted) : _reducer(state, action);
+      } catch (err) {
+        return _reducer(state, action);
+      }
+    }
+    // have state saved
+    const nextState = _reducer(state, action);
+    try {
+      localStorage.setItem(localStorageKey, JSON.stringify(nextState));
+      return nextState;
+    } catch (err) {
+      return nextState;
+    }
+  };
+}
+
+export const reducer = persistStateReducer(stateReducer);
 
 export const { selectAll } = adapter.getSelectors();

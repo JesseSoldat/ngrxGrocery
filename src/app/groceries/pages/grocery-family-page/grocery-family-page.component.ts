@@ -1,15 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { select, Store, Action } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { FamilyMemberGroceryViewModel } from '../../_models';
 import { getFamilyMembersGroceries } from '../../_selectors/grocery-family-page.selectors';
+import { checkOffGroceryFamilyPage } from '../../_reducers/groceries.reducer';
 
 @Component({
   selector: 'app-grocery-family-page',
   templateUrl: './grocery-family-page.component.html',
   styleUrls: ['./grocery-family-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroceryFamilyPageComponent implements OnInit {
   familyMembersGroceries: Observable<FamilyMemberGroceryViewModel[]>;
@@ -18,7 +19,11 @@ export class GroceryFamilyPageComponent implements OnInit {
 
   ngOnInit() {
     this.familyMembersGroceries = this.store.pipe(
-      select(getFamilyMembersGroceries),
+      select(getFamilyMembersGroceries)
     );
+  }
+
+  checkOffGrocery(groceryId: string) {
+    this.store.dispatch(checkOffGroceryFamilyPage({ id: groceryId }));
   }
 }

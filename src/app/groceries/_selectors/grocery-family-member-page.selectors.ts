@@ -1,7 +1,10 @@
 import { createSelector } from '@ngrx/store';
 
 import * as root from '../../_selectors';
-import { getGroceriesByFamilyMember } from './base.selectors';
+import {
+  getGroceriesByFamilyMember,
+  getShowCheckedOffGroceries
+} from './base.selectors';
 
 import { GroceryViewModel } from '../_models';
 
@@ -31,5 +34,23 @@ export const getActiveFamilyMemberGroceries = createSelector(
     // console.log('familyMemberId', familyMemberId);
     // console.log('groceries', groceries);
     return groceries[familyMemberId] || [];
+  }
+);
+
+export const getVisibleActiveFamilyMemberGroceries = createSelector(
+  getActiveFamilyMemberGroceries,
+  getShowCheckedOffGroceries,
+  (groceries, showCheckedOffGroceries): GroceryViewModel[] => {
+    const visibleGroceries = showCheckedOffGroceries
+      ? groceries
+      : groceries.filter(grocery => !grocery.checkedOffOn);
+    if (visibleGroceries && visibleGroceries.length) {
+      // console.log('visibleGroceries', visibleGroceries);
+    }
+
+    return visibleGroceries.map(grocery => ({
+      ...grocery,
+      checkedOf: !!grocery.checkedOffOn
+    }));
   }
 );

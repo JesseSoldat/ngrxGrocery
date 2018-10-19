@@ -7,13 +7,14 @@ import { GroceryViewModel, Grocery } from '../../_models';
 import { FamilyMember } from '../../../_models';
 import {
   getActiveFamilyMember,
-  getActiveFamilyMemberGroceries
+  getVisibleActiveFamilyMemberGroceries
 } from '../../_selectors/grocery-family-member-page.selectors';
 import {
   addGrocery,
   checkOffGroceryPersonPage,
   removeCheckedOffGroceries
 } from '../../_reducers/groceries.reducer';
+import { toggleCheckedOffGroceries } from '../../_reducers/visibility.reducer';
 
 @Component({
   selector: 'app-grocery-family-member-page',
@@ -31,7 +32,7 @@ export class GroceryFamilyMemberPageComponent implements OnInit {
     this.familyMember = this.store.pipe(select(getActiveFamilyMember));
 
     this.groceries = this.store.pipe(
-      select(getActiveFamilyMemberGroceries),
+      select(getVisibleActiveFamilyMemberGroceries),
       tap(g => {})
     );
   }
@@ -44,7 +45,9 @@ export class GroceryFamilyMemberPageComponent implements OnInit {
     this.store.dispatch(checkOffGroceryPersonPage({ id: groceryId }));
   }
 
-  toggleCheckedOffGroceries() {}
+  toggleCheckedOffGroceries() {
+    this.store.dispatch(toggleCheckedOffGroceries());
+  }
 
   removeCheckedOffGroceries(familyMemberId: string) {
     this.store.dispatch(removeCheckedOffGroceries({ familyMemberId }));

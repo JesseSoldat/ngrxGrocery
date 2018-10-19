@@ -21,6 +21,16 @@ export const getGroceries = createSelector(
   fromGroceries.selectAll
 );
 
+export const getVisiblityState = createSelector(
+  groceriesState,
+  state => state.visibility
+);
+
+export const getShowCheckedOffGroceries = createSelector(
+  getVisiblityState,
+  state => state.showCheckedOffGroceries
+);
+
 export const getGroceriesByFamilyMember = createSelector(
   getGroceries,
   groceries =>
