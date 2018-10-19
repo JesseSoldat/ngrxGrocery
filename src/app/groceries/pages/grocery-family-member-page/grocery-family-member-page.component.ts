@@ -11,7 +11,8 @@ import {
 } from '../../_selectors/grocery-family-member-page.selectors';
 import {
   addGrocery,
-  checkOffGroceryPersonPage
+  checkOffGroceryPersonPage,
+  removeCheckedOffGroceries
 } from '../../_reducers/groceries.reducer';
 
 @Component({
@@ -45,5 +46,7 @@ export class GroceryFamilyMemberPageComponent implements OnInit {
 
   toggleCheckedOffGroceries() {}
 
-  removeCheckedOffGroceries(familyMemberId: string) {}
+  removeCheckedOffGroceries(familyMemberId: string) {
+    this.store.dispatch(removeCheckedOffGroceries({ familyMemberId }));
+  }
 }

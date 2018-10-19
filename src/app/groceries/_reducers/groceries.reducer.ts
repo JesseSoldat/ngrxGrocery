@@ -37,6 +37,7 @@ export const addGrocery = ({
   };
 };
 
+// check todo
 export const CHECK_OFF_GROCERY_PERSON_PAGE =
   '[Grocery Person Page] Check off grocery';
 
@@ -51,9 +52,34 @@ export const checkOffGroceryPersonPage = ({
   }
 });
 
+export const CHECK_OFF_GROCERY_FAMILY_PAGE =
+  '[Grocery Family Page] Check off grocery';
+
+export const checkOffGroceryFamilyPage = ({
+  id = '',
+  checkedOffOn = Date.now()
+}) => ({
+  type: CHECK_OFF_GROCERY_FAMILY_PAGE as typeof CHECK_OFF_GROCERY_FAMILY_PAGE,
+  payload: {
+    id,
+    checkedOffOn
+  }
+});
+
+// remove checked todos
+export const REMOVE_CHECKED_OFF_GROCERIES =
+  '[Grocery Person Page] Remove checked off groceries from list';
+
+export const removeCheckedOffGroceries = ({ familyMemberId = '' }) => ({
+  type: REMOVE_CHECKED_OFF_GROCERIES as typeof REMOVE_CHECKED_OFF_GROCERIES,
+  payload: { familyMemberId }
+});
+
 export type GroceriesActions =
   | ReturnType<typeof addGrocery>
-  | ReturnType<typeof checkOffGroceryPersonPage>;
+  | ReturnType<typeof checkOffGroceryPersonPage>
+  | ReturnType<typeof checkOffGroceryFamilyPage>
+  | ReturnType<typeof removeCheckedOffGroceries>;
 
 // Reducer
 export const adapter: EntityAdapter<Grocery> = createEntityAdapter<Grocery>({});
@@ -69,10 +95,27 @@ export function stateReducer(
       return adapter.addOne(action.payload, state);
 
     case CHECK_OFF_GROCERY_PERSON_PAGE:
+    case CHECK_OFF_GROCERY_FAMILY_PAGE:
       return adapter.updateOne(
         { id: action.payload.id, changes: action.payload },
         state
       );
+
+    case REMOVE_CHECKED_OFF_GROCERIES:
+      const idsToDelete = (<string[]>state.ids)
+        .map(groceryId => state.entities[groceryId])
+        .filter(grocery => {
+          const { familyMemberId } = action.payload;
+          if (
+            grocery.familyMemberId === familyMemberId &&
+            grocery.checkedOffOn !== null
+          ) {
+            return grocery;
+          }
+        })
+        .map(grocery => grocery.id);
+
+      return adapter.removeMany(idsToDelete, state);
 
     default:
       return state;
